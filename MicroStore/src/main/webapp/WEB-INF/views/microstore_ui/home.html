@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>MicroStore</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+    <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
+  </head>
+  <body class="sidebar-mini fixed">
+    <div class="wrapper">
+      <!-- Navbar-->
+      <header class="main-header hidden-print"><a class="logo" href="index.html">MicroStore</a>
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button--><a class="sidebar-toggle" href="#" data-toggle="offcanvas"></a>
+          <!-- Navbar Right Menu-->
+          <div class="navbar-custom-menu">
+            <ul class="top-nav">
+              <!--Notification Menu-->
+              <!-- <li class="dropdown notification-menu"><a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell-o fa-lg"></i></a> -->
+                <!-- <ul class="dropdown-menu"> -->
+                  <!-- <li class="not-head">You have 4 new notifications.</li> -->
+                  <!-- <li><a class="media" href="javascript:;"><span class="media-left media-icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span> -->
+                      <!-- <div class="media-body"><span class="block">Lisa sent you a mail</span><span class="text-muted block">2min ago</span></div></a></li> -->
+                  <!-- <li><a class="media" href="javascript:;"><span class="media-left media-icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span> -->
+                      <!-- <div class="media-body"><span class="block">Server Not Working</span><span class="text-muted block">2min ago</span></div></a></li> -->
+                  <!-- <li><a class="media" href="javascript:;"><span class="media-left media-icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span> -->
+                      <!-- <div class="media-body"><span class="block">Transaction xyz complete</span><span class="text-muted block">2min ago</span></div></a></li> -->
+                  <!-- <li class="not-footer"><a href="#">See all notifications.</a></li> -->
+                <!-- </ul> -->
+              <!-- </li> -->
+              <!-- User Menu-->
+              <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
+                <ul class="dropdown-menu settings-menu">
+                  <li><a href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
+                  <li><a href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+                  <li><a href="#" onclick="logout();"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Side-Nav-->
+      <aside class="main-sidebar hidden-print">
+        <section class="sidebar">
+          <div class="user-panel">
+            <div class="pull-left image"><img class="img-circle" src="images/user.png" alt="User Image"></div>
+            <div class="pull-left info">
+              <p>ABCDE FGHIJ</p>
+              <p class="designation">Administrator</p>
+            </div>
+          </div>
+          <!-- Sidebar Menu-->
+          <ul class="sidebar-menu">
+            <li class="active" id="menu_dashboard"><a href="#" onclick="openDashboard();"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+			<li id="menu_manage_my_store"><a href="#" id="manage_my_store"><i class="fa fa-cogs"></i><span>Manage My Store</span></a></li>
+			<li id="menu_acquiring"><a href="#" id="acquiring"><i class="fa fa-snowflake-o"></i><span>Acquiring</span></a></li>
+			<li id="menu_vending"><a href="#" id="vending"><i class="fa fa-paper-plane"></i><span>Vending</span></a></li>
+			<li id="menu_invoice_history"><a href="#" id="invoice_history"><i class="fa fa-file-text"></i><span>Invoice History</span></a></li>
+			<li id="menu_help"><a href="#" id="help"><i class="fa fa-info-circle "></i><span>Help</span></a></li>
+          </ul>
+        </section>
+      </aside>
+      <div class="content-wrapper">
+		<div class="page-title">
+		  <div>
+			<h1 id="div_title">Dashboard</h1>
+			<ul class="breadcrumb side" id="breadcrumb_title">
+			  <li><i class="fa fa-home fa-lg"></i></li>
+			  <li class="active">Dashboard</li>
+			</ul>
+		  </div>
+		</div>
+			
+		    <!---------------------------------------My Dashboard--------------------------------------->	
+			<div id="my_dashboard_div">
+				<div class="row">
+				  <div class="col-md-12">
+					<div class="card">
+					  <div class="card-body">
+						<div class="row">
+							<a href="#" id="my_inventory">
+								<div class="col-md-6">
+									<div class="widget-small info"><i class="icon fa fa-laptop fa-3x"></i>
+										<div class="info">
+											<h4>My Inventory</h4>
+										</div>
+									</div>
+								</div>
+							</a>
+						  
+							<a href="#" id="my_tasks">
+								<div class="col-md-6">
+									<div class="widget-small warning"><i class="icon fa fa-tasks fa-3x"></i>
+										<div class="info">
+											<h4>My Tasks</h4>
+										</div>
+									</div>
+								</div>
+							</a>
+						  
+							<a href="#" id="new_items">
+								<div class="col-md-6">
+									<div class="widget-small primary"><i class="icon fa fa-shopping-cart fa-3x"></i>
+										<div class="info">
+											<h4>New Items</h4>
+										</div>
+									</div>
+								</div>
+							</a>
+						  
+							<a href="#" id="expiring_items">
+								<div class="col-md-6">
+									<div class="widget-small danger"><i class="icon fa fa-exclamation-circle fa-3x"></i>
+										<div class="info">
+											<h4>Expiring Items</h4>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			</div>
+			
+			<!---------------------------------------My Inventory--------------------------------------->
+			<div id="my_inventory_div" hidden>
+				<div class="row">
+				  <div class="col-md-12">
+					<div class="card">
+					  <div class="card-body" style="overflow-x: scroll;">
+						<table class="table table-hover table-bordered" id="myInventoryTable">
+						  <thead>
+							<tr>
+							  <th>Name</th>
+							  <th>Position</th>
+							  <th>Office</th>
+							  <th>Age</th>
+							  <th>Start date</th>
+							  <th>Salary</th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr>
+							  <td>Tiger Nixon</td>
+							  <td>System Architect</td>
+							  <td>Edinburgh</td>
+							  <td>61</td>
+							  <td>2011/04/25</td>
+							  <td>$320,800</td>
+							</tr>
+							<tr>
+							  <td>Garrett Winters</td>
+							  <td>Accountant</td>
+							  <td>Tokyo</td>
+							  <td>63</td>
+							  <td>2011/07/25</td>
+							  <td>$170,750</td>
+							</tr>
+							<tr>
+							  <td>Ashton Cox</td>
+							  <td>Junior Technical Author</td>
+							  <td>San Francisco</td>
+							  <td>66</td>
+							  <td>2009/01/12</td>
+							  <td>$86,000</td>
+							</tr>
+							<tr>
+							  <td>Cedric Kelly</td>
+							  <td>Senior Javascript Developer</td>
+							  <td>Edinburgh</td>
+							  <td>22</td>
+							  <td>2012/03/29</td>
+							  <td>$433,060</td>
+							</tr>
+							<tr>
+							  <td>Airi Satou</td>
+							  <td>Accountant</td>
+							  <td>Tokyo</td>
+							  <td>33</td>
+							  <td>2008/11/28</td>
+							  <td>$162,700</td>
+							</tr>
+							<tr>
+							  <td>Brielle Williamson</td>
+							  <td>Integration Specialist</td>
+							  <td>New York</td>
+							  <td>61</td>
+							  <td>2012/12/02</td>
+							  <td>$372,000</td>
+							</tr>
+							<tr>
+							  <td>Herrod Chandler</td>
+							  <td>Sales Assistant</td>
+							  <td>San Francisco</td>
+							  <td>59</td>
+							  <td>2012/08/06</td>
+							  <td>$137,500</td>
+							</tr>
+							<tr>
+							  <td>Rhona Davidson</td>
+							  <td>Integration Specialist</td>
+							  <td>Tokyo</td>
+							  <td>55</td>
+							  <td>2010/10/14</td>
+							  <td>$327,900</td>
+							</tr>
+							<tr>
+							  <td>Colleen Hurst</td>
+							  <td>Javascript Developer</td>
+							  <td>San Francisco</td>
+							  <td>39</td>
+							  <td>2009/09/15</td>
+							  <td>$205,500</td>
+							</tr>
+							<tr>
+							  <td>Sonya Frost</td>
+							  <td>Software Engineer</td>
+							  <td>Edinburgh</td>
+							  <td>23</td>
+							  <td>2008/12/13</td>
+							  <td>$103,600</td>
+							</tr>
+							<tr>
+							  <td>Jena Gaines</td>
+							  <td>Office Manager</td>
+							  <td>London</td>
+							  <td>30</td>
+							  <td>2008/12/19</td>
+							  <td>$90,560</td>
+							</tr>
+							<tr>
+							  <td>Quinn Flynn</td>
+							  <td>Support Lead</td>
+							  <td>Edinburgh</td>
+							  <td>22</td>
+							  <td>2013/03/03</td>
+							  <td>$342,000</td>
+							</tr>
+							<tr>
+							  <td>Charde Marshall</td>
+							  <td>Regional Director</td>
+							  <td>San Francisco</td>
+							  <td>36</td>
+							  <td>2008/10/16</td>
+							  <td>$470,600</td>
+							</tr>
+							<tr>
+							  <td>Haley Kennedy</td>
+							  <td>Senior Marketing Designer</td>
+							  <td>London</td>
+							  <td>43</td>
+							  <td>2012/12/18</td>
+							  <td>$313,500</td>
+							</tr>
+							<tr>
+							  <td>Tatyana Fitzpatrick</td>
+							  <td>Regional Director</td>
+							  <td>London</td>
+							  <td>19</td>
+							  <td>2010/03/17</td>
+							  <td>$385,750</td>
+							</tr>
+							<tr>
+							  <td>Michael Silva</td>
+							  <td>Marketing Designer</td>
+							  <td>London</td>
+							  <td>66</td>
+							  <td>2012/11/27</td>
+							  <td>$198,500</td>
+							</tr>
+							<tr>
+							  <td>Paul Byrd</td>
+							  <td>Chief Financial Officer (CFO)</td>
+							  <td>New York</td>
+							  <td>64</td>
+							  <td>2010/06/09</td>
+							  <td>$725,000</td>
+							</tr>
+							<tr>
+							  <td>Gloria Little</td>
+							  <td>Systems Administrator</td>
+							  <td>New York</td>
+							  <td>59</td>
+							  <td>2009/04/10</td>
+							  <td>$237,500</td>
+							</tr>
+							<tr>
+							  <td>Bradley Greer</td>
+							  <td>Software Engineer</td>
+							  <td>London</td>
+							  <td>41</td>
+							  <td>2012/10/13</td>
+							  <td>$132,000</td>
+							</tr>
+							<tr>
+							  <td>Dai Rios</td>
+							  <td>Personnel Lead</td>
+							  <td>Edinburgh</td>
+							  <td>35</td>
+							  <td>2012/09/26</td>
+							  <td>$217,500</td>
+							</tr>
+							<tr>
+							  <td>Jenette Caldwell</td>
+							  <td>Development Lead</td>
+							  <td>New York</td>
+							  <td>30</td>
+							  <td>2011/09/03</td>
+							  <td>$345,000</td>
+							</tr>
+							<tr>
+							  <td>Yuri Berry</td>
+							  <td>Chief Marketing Officer (CMO)</td>
+							  <td>New York</td>
+							  <td>40</td>
+							  <td>2009/06/25</td>
+							  <td>$675,000</td>
+							</tr>
+							<tr>
+							  <td>Caesar Vance</td>
+							  <td>Pre-Sales Support</td>
+							  <td>New York</td>
+							  <td>21</td>
+							  <td>2011/12/12</td>
+							  <td>$106,450</td>
+							</tr>
+							<tr>
+							  <td>Doris Wilder</td>
+							  <td>Sales Assistant</td>
+							  <td>Sidney</td>
+							  <td>23</td>
+							  <td>2010/09/20</td>
+							  <td>$85,600</td>
+							</tr>
+							<tr>
+							  <td>Angelica Ramos</td>
+							  <td>Chief Executive Officer (CEO)</td>
+							  <td>London</td>
+							  <td>47</td>
+							  <td>2009/10/09</td>
+							  <td>$1,200,000</td>
+							</tr>
+							<tr>
+							  <td>Gavin Joyce</td>
+							  <td>Developer</td>
+							  <td>Edinburgh</td>
+							  <td>42</td>
+							  <td>2010/12/22</td>
+							  <td>$92,575</td>
+							</tr>
+							<tr>
+							  <td>Jennifer Chang</td>
+							  <td>Regional Director</td>
+							  <td>Singapore</td>
+							  <td>28</td>
+							  <td>2010/11/14</td>
+							  <td>$357,650</td>
+							</tr>
+							<tr>
+							  <td>Brenden Wagner</td>
+							  <td>Software Engineer</td>
+							  <td>San Francisco</td>
+							  <td>28</td>
+							  <td>2011/06/07</td>
+							  <td>$206,850</td>
+							</tr>
+							<tr>
+							  <td>Fiona Green</td>
+							  <td>Chief Operating Officer (COO)</td>
+							  <td>San Francisco</td>
+							  <td>48</td>
+							  <td>2010/03/11</td>
+							  <td>$850,000</td>
+							</tr>
+							<tr>
+							  <td>Shou Itou</td>
+							  <td>Regional Marketing</td>
+							  <td>Tokyo</td>
+							  <td>20</td>
+							  <td>2011/08/14</td>
+							  <td>$163,000</td>
+							</tr>
+							<tr>
+							  <td>Michelle House</td>
+							  <td>Integration Specialist</td>
+							  <td>Sidney</td>
+							  <td>37</td>
+							  <td>2011/06/02</td>
+							  <td>$95,400</td>
+							</tr>
+							<tr>
+							  <td>Suki Burks</td>
+							  <td>Developer</td>
+							  <td>London</td>
+							  <td>53</td>
+							  <td>2009/10/22</td>
+							  <td>$114,500</td>
+							</tr>
+							<tr>
+							  <td>Prescott Bartlett</td>
+							  <td>Technical Author</td>
+							  <td>London</td>
+							  <td>27</td>
+							  <td>2011/05/07</td>
+							  <td>$145,000</td>
+							</tr>
+							<tr>
+							  <td>Gavin Cortez</td>
+							  <td>Team Leader</td>
+							  <td>San Francisco</td>
+							  <td>22</td>
+							  <td>2008/10/26</td>
+							  <td>$235,500</td>
+							</tr>
+							<tr>
+							  <td>Martena Mccray</td>
+							  <td>Post-Sales support</td>
+							  <td>Edinburgh</td>
+							  <td>46</td>
+							  <td>2011/03/09</td>
+							  <td>$324,050</td>
+							</tr>
+							<tr>
+							  <td>Unity Butler</td>
+							  <td>Marketing Designer</td>
+							  <td>San Francisco</td>
+							  <td>47</td>
+							  <td>2009/12/09</td>
+							  <td>$85,675</td>
+							</tr>
+							<tr>
+							  <td>Howard Hatfield</td>
+							  <td>Office Manager</td>
+							  <td>San Francisco</td>
+							  <td>51</td>
+							  <td>2008/12/16</td>
+							  <td>$164,500</td>
+							</tr>
+							<tr>
+							  <td>Hope Fuentes</td>
+							  <td>Secretary</td>
+							  <td>San Francisco</td>
+							  <td>41</td>
+							  <td>2010/02/12</td>
+							  <td>$109,850</td>
+							</tr>
+							<tr>
+							  <td>Vivian Harrell</td>
+							  <td>Financial Controller</td>
+							  <td>San Francisco</td>
+							  <td>62</td>
+							  <td>2009/02/14</td>
+							  <td>$452,500</td>
+							</tr>
+							<tr>
+							  <td>Timothy Mooney</td>
+							  <td>Office Manager</td>
+							  <td>London</td>
+							  <td>37</td>
+							  <td>2008/12/11</td>
+							  <td>$136,200</td>
+							</tr>
+							<tr>
+							  <td>Jackson Bradshaw</td>
+							  <td>Director</td>
+							  <td>New York</td>
+							  <td>65</td>
+							  <td>2008/09/26</td>
+							  <td>$645,750</td>
+							</tr>
+							<tr>
+							  <td>Olivia Liang</td>
+							  <td>Support Engineer</td>
+							  <td>Singapore</td>
+							  <td>64</td>
+							  <td>2011/02/03</td>
+							  <td>$234,500</td>
+							</tr>
+							<tr>
+							  <td>Bruno Nash</td>
+							  <td>Software Engineer</td>
+							  <td>London</td>
+							  <td>38</td>
+							  <td>2011/05/03</td>
+							  <td>$163,500</td>
+							</tr>
+							<tr>
+							  <td>Sakura Yamamoto</td>
+							  <td>Support Engineer</td>
+							  <td>Tokyo</td>
+							  <td>37</td>
+							  <td>2009/08/19</td>
+							  <td>$139,575</td>
+							</tr>
+							<tr>
+							  <td>Thor Walton</td>
+							  <td>Developer</td>
+							  <td>New York</td>
+							  <td>61</td>
+							  <td>2013/08/11</td>
+							  <td>$98,540</td>
+							</tr>
+							<tr>
+							  <td>Finn Camacho</td>
+							  <td>Support Engineer</td>
+							  <td>San Francisco</td>
+							  <td>47</td>
+							  <td>2009/07/07</td>
+							  <td>$87,500</td>
+							</tr>
+							<tr>
+							  <td>Serge Baldwin</td>
+							  <td>Data Coordinator</td>
+							  <td>Singapore</td>
+							  <td>64</td>
+							  <td>2012/04/09</td>
+							  <td>$138,575</td>
+							</tr>
+							<tr>
+							  <td>Zenaida Frank</td>
+							  <td>Software Engineer</td>
+							  <td>New York</td>
+							  <td>63</td>
+							  <td>2010/01/04</td>
+							  <td>$125,250</td>
+							</tr>
+							<tr>
+							  <td>Zorita Serrano</td>
+							  <td>Software Engineer</td>
+							  <td>San Francisco</td>
+							  <td>56</td>
+							  <td>2012/06/01</td>
+							  <td>$115,000</td>
+							</tr>
+							<tr>
+							  <td>Jennifer Acosta</td>
+							  <td>Junior Javascript Developer</td>
+							  <td>Edinburgh</td>
+							  <td>43</td>
+							  <td>2013/02/01</td>
+							  <td>$75,650</td>
+							</tr>
+							<tr>
+							  <td>Cara Stevens</td>
+							  <td>Sales Assistant</td>
+							  <td>New York</td>
+							  <td>46</td>
+							  <td>2011/12/06</td>
+							  <td>$145,600</td>
+							</tr>
+							<tr>
+							  <td>Hermione Butler</td>
+							  <td>Regional Director</td>
+							  <td>London</td>
+							  <td>47</td>
+							  <td>2011/03/21</td>
+							  <td>$356,250</td>
+							</tr>
+							<tr>
+							  <td>Lael Greer</td>
+							  <td>Systems Administrator</td>
+							  <td>London</td>
+							  <td>21</td>
+							  <td>2009/02/27</td>
+							  <td>$103,500</td>
+							</tr>
+							<tr>
+							  <td>Jonas Alexander</td>
+							  <td>Developer</td>
+							  <td>San Francisco</td>
+							  <td>30</td>
+							  <td>2010/07/14</td>
+							  <td>$86,500</td>
+							</tr>
+							<tr>
+							  <td>Shad Decker</td>
+							  <td>Regional Director</td>
+							  <td>Edinburgh</td>
+							  <td>51</td>
+							  <td>2008/11/13</td>
+							  <td>$183,000</td>
+							</tr>
+							<tr>
+							  <td>Michael Bruce</td>
+							  <td>Javascript Developer</td>
+							  <td>Singapore</td>
+							  <td>29</td>
+							  <td>2011/06/27</td>
+							  <td>$183,000</td>
+							</tr>
+							<tr>
+							  <td>Donna Snider</td>
+							  <td>Customer Support</td>
+							  <td>New York</td>
+							  <td>27</td>
+							  <td>2011/01/25</td>
+							  <td>$112,000</td>
+							</tr>
+						  </tbody>
+						</table>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			</div>
+			
+			<!---------------------------------------My Tasks--------------------------------------->
+			<div id="my_tasks_div" hidden>
+				<div class="row">
+				  <div class="col-md-6">
+					<div class="card">
+					  <div class="card-title-w-btn">
+						<h3 class="title">Bootstrap Notify</h3>
+						<p><a class="btn btn-primary icon-btn" href="http://bootstrap-notify.remabledesigns.com/" target="_blank"><i class="fa fa-file"></i>Docs</a></p>
+					  </div>
+					  <div class="card-body">
+						<p>This plugin can be used to notify user about status of some action which he has performed.</p>
+						<h4>Demo</h4><a class="btn btn-info" id="demoNotify" href="#">Sample Notification</a>
+					  </div>
+					</div>
+				  </div>
+				  <div class="col-md-6">
+					<div class="card">
+					  <div class="card-title-w-btn">
+						<h3 class="title">SweetAlert</h3>
+						<p><a class="btn btn-primary icon-btn" href="http://t4t5.github.io/sweetalert/" target="_blank"><i class="fa fa-file"></i>Docs</a></p>
+					  </div>
+					  <div class="card-body">
+						<p>This plugin can be used as the replacement of native javascript alert, confirm and prompt functions.</p>
+						<h4>Demo</h4><a class="btn btn-info" id="demoSwal" href="#">Sample Alert</a>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			</div>
+			
+			<!---------------------------------------New Items--------------------------------------->
+			<div id="new_items_div" hidden>
+			hehehehe
+			</div>
+			
+			<!---------------------------------------Expiring Items--------------------------------------->
+			<div id="expiring_items_div" hidden>
+			hohohoho
+			</div>
+			
+			<!---------------------------------------Manage My Store--------------------------------------->
+			<div id="manage_my_store_div" hidden>
+				<div class="panel-group" id="accordion">
+				  <div class="panel panel-default">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+						<div class="panel-heading">
+							<h4 class="panel-title"><i class="fa fa-plus-circle fa-lg"></i> Add</h4>
+						</div>
+					</a>
+					<div id="collapse1" class="panel-collapse collapse in">
+					  <div class="panel-body">
+						<div class="bs-component">
+						  <ul class="nav nav-tabs">
+							<li class="active"><a href="#add_company_navtabadd" data-toggle="tab" aria-expanded="true">Company</a></li>
+							<li><a href="#product_category_navtabadd" data-toggle="tab" aria-expanded="false">Product Category</a></li>
+							<li><a href="#product_type_navtabadd" data-toggle="tab" aria-expanded="false">Product Type</a></li>
+							<li><a href="#product_detail_navtabadd" data-toggle="tab" aria-expanded="false">Product Detail</a></li>
+							<li><a href="#retailer_navtabadd" data-toggle="tab" aria-expanded="false">Retailer</a></li>
+							<li><a href="#city_navtabadd" data-toggle="tab" aria-expanded="false">City</a></li>
+						  </ul>
+						  <div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade active in" id="add_company_navtabadd">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">New Company Name</label>
+									  <div class="col-lg-10">
+										<input class="form-control" id="input_new_company_name" type="text" placeholder="Company Name">
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary" id="add_company_btn">Add Company</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="product_category_navtabadd">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">New Product Category</label>
+									  <div class="col-lg-10">
+										<input class="form-control" id="input_new_product_category" type="text" placeholder="Product Category">
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary" id="add_category_btn">Add Category</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="product_detail_navtabadd">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Company</label>
+									  <div class="col-lg-10">
+										<select class="form-control">
+										  <optgroup label="Select Company" id="company_list_add">
+
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Product Category</label>
+									  <div class="col-lg-10">
+										<select class="form-control" onchange="getProductTypeByCategory();">
+										  <optgroup label="Select Category" id="category_list_add">
+
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Product Type</label>
+									  <div class="col-lg-10">
+										<select class="form-control">
+										  <optgroup label="Select Cities" id="type_list_add">
+
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Unit</label>
+									  <div class="col-lg-10">
+										<select class="form-control">
+										  <optgroup label="Select Cities" id="unit_list_add">
+
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">New Product Detail</label>
+									  <div class="col-lg-10">
+										<input class="form-control" id="new_product_detail" type="text" placeholder="Product Detail">
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary" id="add_prodDet_btn">Add Detail</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="product_type_navtabadd">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Product Category</label>
+									  <div class="col-lg-10">
+										<select class="form-control">
+										  <optgroup label="Select Category" id="product_category_add">
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">New Product Type</label>
+									  <div class="col-lg-10">
+										<input class="form-control" id="new_product_type" type="text" placeholder="Product Type">
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary" id="add_type_btn">Add Type</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="retailer_navtabadd">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">City</label>
+									  <div class="col-lg-10">
+										<select class="form-control">
+										  <optgroup label="Select Cities" id="city_list_add">
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">New Retailer Name</label>
+									  <div class="col-lg-10">
+										<input class="form-control" id="new_retailer" type="text" placeholder="Retailer">
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Retailer Address</label>
+									  <div class="col-lg-10">
+										<textarea class="form-control" id="retailer_Address_text" rows="3"></textarea>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary" id="add_retailer_btn">Add Retailer</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="city_navtabadd">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">New City</label>
+									  <div class="col-lg-10">
+										<input class="form-control" id="new_city" type="text" placeholder="City">
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary" id="add_city_btn">Add City</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				 <div class="panel panel-default">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+						<div class="panel-heading">
+							<h4 class="panel-title"><i class="fa fa-minus-circle  fa-lg"></i> Remove</h4>
+						</div>
+					</a>
+					<div id="collapse2" class="panel-collapse collapse">
+					  <div class="panel-body">
+						<div class="bs-component">
+						  <ul class="nav nav-tabs">
+							<li class="active"><a href="#remove_company_navtabremove" data-toggle="tab" aria-expanded="true">Company</a></li>
+							<li><a href="#product_category_navtabremove" data-toggle="tab" aria-expanded="false">Product Category</a></li>
+							<li><a href="#product_detail_navtabremove" data-toggle="tab" aria-expanded="false">Product Detail</a></li>
+							<li><a href="#product_type_navtabremove" data-toggle="tab" aria-expanded="false">Product Type</a></li>
+							<li><a href="#retailer_navtabremove" data-toggle="tab" aria-expanded="false">Retailer</a></li>
+							<li><a href="#city_navtabremove" data-toggle="tab" aria-expanded="false">City</a></li>
+						  </ul>
+						  <div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade active in" id="remove_company_navtabremove">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Company</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary">Remove Company</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="product_category_navtabremove">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Category</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary">Remove Category</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="product_detail_navtabremove">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Company</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Product Category</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Product Type</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Product Detail</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary">Remove Detail</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="product_type_navtabremove">
+							   <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Product Category</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Product Type</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary">Remove Type</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="retailer_navtabremove">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">City</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Retailer Name</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">Retailer Address</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary">Remove Retailer</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+							<div class="tab-pane fade" id="city_navtabremove">
+							  <div class="well bs-component">
+								<form class="form-horizontal">
+								  <fieldset>
+									<legend></legend>
+									<div class="form-group">
+									  <label class="col-lg-2 control-label">City</label>
+									  <div class="col-lg-10">
+										<select class="form-control" id="demoSelect">
+										  <optgroup label="Select Cities">
+											<option>Ahmedabad</option>
+											<option>Surat</option>
+											<option>Vadodara</option>
+										  </optgroup>
+										</select>
+									  </div>
+									</div>
+									<div class="form-group">
+									  <div class="col-lg-10 col-lg-offset-2" align="right">
+										<button class="btn btn-primary">Remove City</button>
+									  </div>
+									</div>
+								  </fieldset>
+								</form>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			</div>
+			
+			<!---------------------------------------Acquiring--------------------------------------->
+			<div id="acquiring_div" hidden>
+				<div class="row">
+				  <div class="col-md-12">
+					<div class="card">
+						<div class="well bs-component">
+							<form class="form-horizontal">
+							  <fieldset>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Company</label>
+								  <div class="col-lg-10">
+									<select class="form-control" onchange="getCategoriesbyCompany('ACQ');">
+									  <optgroup label="Select Company" id="company_list_acquiring">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Category</label>
+								  <div class="col-lg-10">
+									<select class="form-control" onchange="getProductTypeByCompanyAndCategory('ACQ');">
+									  <optgroup label="Select Category" id="category_list_acquiring">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Product Type</label>
+								  <div class="col-lg-10">
+									<select class="form-control" onchange="getProductDetails('ACQ');">
+									  <optgroup label="Select Type" id="type_list_acquiring">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Product Detail</label>
+								  <div class="col-lg-10">
+									<select class="form-control">
+									  <optgroup label="Select Cities" id="prodDet_list_acquiring">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Retailer</label>
+								  <div class="col-lg-10">
+									<select class="form-control">
+									  <optgroup label="Select Cities" id="retailer_list_acquiring">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group">
+								  <div class="col-lg-10 col-lg-offset-2" align="right">
+									<button class="btn btn-primary">Add Item to My Store</button>
+								  </div>
+								</div>
+							  </fieldset>
+							</form>
+						</div>
+					</div>
+				  </div>
+				</div>
+			</div>
+			
+			<!---------------------------------------Vending--------------------------------------->
+			<div id="vending_div" hidden>
+				<div class="row">
+				  <div class="col-md-5">
+					<div class="card">
+						<div class="well bs-component">
+							<form class="form-horizontal">
+							  <fieldset>
+								<div class="form-group">
+								  <label class="col-lg-2 control-label">Company</label>
+								  <div class="col-lg-10">
+									<select class="form-control" onchange="getCategoriesbyCompany('VEN');">
+									  <optgroup label="Select Company" id="company_list_vending">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label class="col-lg-2 control-label">Category</label>
+								  <div class="col-lg-10">
+									<select class="form-control" onchange="getProductTypeByCompanyAndCategory('VEN');">
+									  <optgroup label="Select Category" id="category_list_vending">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label class="col-lg-2 control-label">Product Type</label>
+								  <div class="col-lg-10">
+									<select class="form-control" onchange="getProductDetails('VEN')">
+									  <optgroup label="Select Type" id="type_list_vending">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label class="col-lg-2 control-label">Product Detail</label>
+								  <div class="col-lg-10">
+									<select class="form-control" onchange="getBatchList('VEN')">
+									  <optgroup label="Select Detail" id="prodDet_list_vending">
+		 							  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label class="col-lg-2 control-label">Batch Number</label>
+								  <div class="col-lg-10">
+									<select class="form-control">
+									  <optgroup label="Select Batch Number" id="batch_list_vending">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label class="col-lg-2 control-label">Quantity</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="input_quantity_vending" type="text" placeholder="Quantity">
+								  </div>
+								</div>
+								<div class="form-group">
+								  <label class="col-lg-2 control-label">Total Price</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="price_vending" type="text" placeholder="Total Price" disabled>
+								  </div>
+								</div>
+								<div class="form-group">
+								  <div class="col-lg-10 col-lg-offset-2" align="right">
+									<button class="btn btn-primary">Add to Basket</button>
+								  </div>
+								</div>
+							  </fieldset>
+							</form>
+						</div>
+					</div>
+				  </div>
+				  <div class="col-md-7">
+					<div class="card">
+						<form class="form-horizontal">
+							<fieldset>
+								<div class="form-group">
+									<table class="table table-hover table-bordered" id="sampleTable">
+									  <thead>
+										<tr>
+										  <th>Name</th>
+										  <th>Position</th>
+										  <th>Office</th>
+										  <th>Age</th>
+										  <th>Start date</th>
+										  <th>Salary</th>
+										</tr>
+									  </thead>
+									  <tbody>
+										<tr>
+										  <td>Tiger Nixon</td>
+										  <td>System Architect</td>
+										  <td>Edinburgh</td>
+										  <td>61</td>
+										  <td>2011/04/25</td>
+										  <td>$320,800</td>
+										</tr>
+										<tr>
+										  <td>Garrett Winters</td>
+										  <td>Accountant</td>
+										  <td>Tokyo</td>
+										  <td>63</td>
+										  <td>2011/07/25</td>
+										  <td>$170,750</td>
+										</tr>
+										<tr>
+										  <td>Ashton Cox</td>
+										  <td>Junior Technical Author</td>
+										  <td>San Francisco</td>
+										  <td>66</td>
+										  <td>2009/01/12</td>
+										  <td>$86,000</td>
+										</tr>
+										<tr>
+										  <td>Cedric Kelly</td>
+										  <td>Senior Javascript Developer</td>
+										  <td>Edinburgh</td>
+										  <td>22</td>
+										  <td>2012/03/29</td>
+										  <td>$433,060</td>
+										</tr>
+										<tr>
+										  <td>Airi Satou</td>
+										  <td>Accountant</td>
+										  <td>Tokyo</td>
+										  <td>33</td>
+										  <td>2008/11/28</td>
+										  <td>$162,700</td>
+										</tr>
+										<tr>
+										  <td>Brielle Williamson</td>
+										  <td>Integration Specialist</td>
+										  <td>New York</td>
+										  <td>61</td>
+										  <td>2012/12/02</td>
+										  <td>$372,000</td>
+										</tr>
+										<tr>
+										  <td>Herrod Chandler</td>
+										  <td>Sales Assistant</td>
+										  <td>San Francisco</td>
+										  <td>59</td>
+										  <td>2012/08/06</td>
+										  <td>$137,500</td>
+										</tr>
+										</tr>
+									  </tbody>
+									</table>
+								</div>
+								<div class="form-group">
+								  <div class="col-lg-10 col-lg-offset-2" align="right">
+									<button class="btn btn-warning">Clear Basket</button>
+									<button class="btn btn-primary">Sell Basket</button>
+								  </div>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				  </div>
+				</div>
+			</div>
+			
+			<!---------------------------------------Invoice History--------------------------------------->
+			<div id="invoice_history_div" hidden>
+			Invoice History
+			</div>
+			
+			<!---------------------------------------Help--------------------------------------->
+			<div id="help_div" hidden>
+			Help
+			</div>
+			
+		</div>	
+		
+    </div>
+    <!-- Javascripts-->
+	
+	<!-- Main-->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/pace.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/globalvariable.js"></script>
+	
+	<!-- Table-->
+	<script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+	
+	<!-- Sweet Notification -->
+	<script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="js/plugins/sweetalert.min.js"></script>
+	
+	<!-- Custom Scripts-->
+	<script>
+	
+	/***********Opening Dashboard***********/
+	function openDashboard()
+	{
+		$( "#menu_dashboard" ).addClass("active");
+		$( "#menu_manage_my_store" ).removeClass("active");
+		$( "#menu_acquiring" ).removeClass("active");
+		$( "#menu_vending" ).removeClass("active");
+		$( "#menu_invoice_history" ).removeClass("active");
+		$( "#menu_help" ).removeClass("active");
+		
+		$("#div_title").html('Dashboard');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li class="active">Dashboard</li>');
+		
+		$("#my_dashboard_div").fadeIn();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").hide();	
+		$("#new_items_div").hide();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").hide();
+		$("#vending_div").hide();
+		$("#invoice_history_div").hide();
+		$("#help_div").hide();
+		
+	}
+	
+	/***********Opening My Inventory***********/
+	$("#my_inventory").click(function(){
+		$("#div_title").html('My Inventory');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li><a href="#" onclick="openDashboard();">Dashboard</a></li><li class="active">My Inventory</li>');
+	
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").fadeIn();
+		$("#my_tasks_div").hide();
+		$("#new_items_div").hide();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").hide();
+		$("#vending_div").hide();
+		$("#invoice_history_div").hide();
+		$("#help_div").hide();
+    });
+	
+	/***********Opening My Tasks***********/
+	$("#my_tasks").click(function(){	
+		$("#div_title").html('My Tasks');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li><a href="#" onclick="openDashboard();">Dashboard</a></li><li class="active">My Tasks</li>');
+		
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").fadeIn();
+		$("#new_items_div").hide();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").hide();
+		$("#vending_div").hide();
+		$("#invoice_history_div").hide();
+		$("#help_div").hide();
+    });
+	
+	/***********Opening New Items***********/
+	$("#new_items").click(function(){	
+		$("#div_title").html('New Items');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li><a href="#" onclick="openDashboard();">Dashboard</a></li><li class="active">New Items</li>');
+		
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").hide();
+		$("#new_items_div").fadeIn();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").hide();
+		$("#vending_div").hide();
+		$("#invoice_history_div").hide();
+		$("#help_div").hide();
+    });
+	
+	/***********Opening Expiring Items***********/
+	$("#expiring_items").click(function(){	
+		$("#div_title").html('Expiring Items');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li><a href="#" onclick="openDashboard();">Dashboard</a></li><li class="active">Expiring Items</li>');
+		
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").hide();
+		$("#new_items_div").hide();
+		$("#expiring_items_div").fadeIn();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").hide();
+		$("#vending_div").hide();
+		$("#invoice_history_div").hide();
+		$("#help_div").hide();
+    });
+	
+	/***********Opening Manage My Store***********/
+	$("#manage_my_store").click(function(){	
+		$( "#menu_dashboard" ).removeClass("active");
+		$( "#menu_manage_my_store" ).addClass("active");
+		$( "#menu_acquiring" ).removeClass("active");
+		$( "#menu_vending" ).removeClass("active");
+		$( "#menu_invoice_history" ).removeClass("active");
+		$( "#menu_help" ).removeClass("active");
+		
+		$("#div_title").html('Manage My Store');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li class="active">Manage My Store</li>');
+		
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").hide();
+		$("#new_items_div").hide();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").fadeIn();
+		$("#acquiring_div").hide();
+		$("#vending_div").hide();
+		$("#invoice_history_div").hide();
+		$("#help_div").hide();
+    });
+	
+	/***********Opening Acquiring***********/
+	$("#acquiring").click(function(){
+		$( "#menu_dashboard" ).removeClass("active");
+		$( "#menu_manage_my_store" ).removeClass("active");
+		$( "#menu_acquiring" ).addClass("active");
+		$( "#menu_vending" ).removeClass("active");
+		$( "#menu_invoice_history" ).removeClass("active");
+		$( "#menu_help" ).removeClass("active");
+	
+		$("#div_title").html('Acquiring');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li class="active">Acquiring</li>');
+		
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").hide();
+		$("#new_items_div").hide();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").fadeIn();
+		$("#vending_div").hide();
+		$("#invoice_history_div").hide();
+		$("#help_div").hide();
+    });
+	
+	/***********Opening Vending***********/
+	$("#vending").click(function(){	
+		$( "#menu_dashboard" ).removeClass("active");
+		$( "#menu_manage_my_store" ).removeClass("active");
+		$( "#menu_acquiring" ).removeClass("active");
+		$( "#menu_vending" ).addClass("active");
+		$( "#menu_invoice_history" ).removeClass("active");
+		$( "#menu_help" ).removeClass("active");
+	
+		$("#div_title").html('Vending');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li class="active">Vending</li>');
+		
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").hide();
+		$("#new_items_div").hide();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").hide();
+		$("#vending_div").fadeIn();
+		$("#invoice_history_div").hide();
+		$("#help_div").hide();
+    });
+	
+	/***********Opening Invoice History***********/
+	$("#invoice_history").click(function(){	
+		$( "#menu_dashboard" ).removeClass("active");
+		$( "#menu_manage_my_store" ).removeClass("active");
+		$( "#menu_acquiring" ).removeClass("active");
+		$( "#menu_vending" ).removeClass("active");
+		$( "#menu_invoice_history" ).addClass("active");
+		$( "#menu_help" ).removeClass("active");
+	
+		$("#div_title").html('Invoice History');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li class="active">Invoice History</li>');
+		
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").hide();
+		$("#new_items_div").hide();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").hide();
+		$("#vending_div").hide();
+		$("#invoice_history_div").fadeIn();
+		$("#help_div").hide();
+    });
+	
+	/***********Opening Help***********/
+	$("#help").click(function(){
+		$( "#menu_dashboard" ).removeClass("active");
+		$( "#menu_manage_my_store" ).removeClass("active");
+		$( "#menu_acquiring" ).removeClass("active");
+		$( "#menu_vending" ).removeClass("active");
+		$( "#menu_invoice_history" ).removeClass("active");
+		$( "#menu_help" ).addClass("active");
+		
+		$("#div_title").html('Help');
+		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li class="active">Help</li>');
+		
+		$("#my_dashboard_div").hide();
+		$("#my_inventory_div").hide();
+		$("#my_tasks_div").hide();
+		$("#new_items_div").hide();
+		$("#expiring_items_div").hide();
+		$("#manage_my_store_div").hide();
+		$("#acquiring_div").hide();
+		$("#vending_div").hide();
+		$("#invoice_history_div").hide();
+		$("#help_div").fadeIn();
+    });
+	
+	
+	$(document).ready(function() {
+		getCompanyList();
+		getProductCategoryList();
+		getCityList();
+		getMyInventory();
+		getUnitList();
+	});
+	
+	
+	/*********Get Company List*********/
+	function getCompanyList()
+	{
+		$("#company_list_acquiring").html('');
+		$("#company_list_add").html('');
+		$("#company_list_vending").html('');
+		$.ajax({
+			type: 'get',
+			url: localUrl+'getCompanyList',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(response){
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$("#company_list_acquiring").append(optionDB);	
+					$("#company_list_add").append(optionDB);
+					$("#company_list_vending").append(optionDB);
+				});
+				getCategoriesbyCompany('ADD');
+				getCategoriesbyCompany('ACQ');
+				getCategoriesbyCompany('VEN');
+			},
+			error: function(){alert("Unexpected error at getCompanyList().");}
+		});
+	}
+	
+	/*********Get Category List*********/
+	function getCategoriesbyCompany(valuee)
+	{
+		var companyName = '';
+		var category = '';
+		if(valuee=="ACQ")
+		{
+			companyName="#company_list_acquiring option:selected";
+			category="#category_list_acquiring";
+		}
+		
+		if(valuee=="ADD")
+		{
+			companyName="#company_list_add option:selected";
+			category="#category_list_add";
+		}
+		
+		if(valuee=="VEN")
+		{
+			companyName="#company_list_vending option:selected";
+			category="#category_list_vending";
+		}
+		
+		$(category).html('');
+		$.ajax({
+			type : 'post',
+			url : localUrl + 'getCategoriesbyCompany',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'companyName' : $(companyName).val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$(category).append(optionDB);				
+				});
+				getProductTypeByCompanyAndCategory(valuee);
+			},
+			error : function(){alert("Unexpected error at getCategoriesbyCompany().");}
+		});
+	}
+	
+	/*********Get Type List*********/
+	function getProductTypeByCompanyAndCategory(valuee)
+	{
+		var companyName = '';
+		var category = '';
+		var type = '';
+		if(valuee=="ACQ")
+		{
+			companyName="#company_list_acquiring option:selected";
+			category="#category_list_acquiring option:selected";
+			type="#type_list_acquiring";
+		}
+		
+		if(valuee=="ADD")
+		{
+			companyName="#company_list_add option:selected";
+			category="#category_list_add option:selected";
+			type="#type_list_add";
+		}
+		
+		if(valuee=="VEN")
+		{
+			companyName="#company_list_vending option:selected";
+			category="#category_list_vending option:selected";
+			type="#type_list_vending";
+		}
+		
+		$(type).html('');
+		$.ajax({
+			type : 'post',
+			url : localUrl + 'getProductTypeByCompanyAndCategory',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'companyName' : $(companyName).val(), 'category' : $(category).val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$(type).append(optionDB);				
+				});
+				if(valuee=="ACQ")
+					getProductDetails("ACQ");
+				if(valuee=="VEN")
+					getProductDetails("VEN");
+			},
+			error : function(){alert("Unexpected error at getProductTypeByCompanyAndCategory().");}
+		});
+	}
+	
+	/*********Get Product Details List*********/
+	function getProductDetails(valuee)
+	{
+		var companyName = '';
+		var category = '';
+		var type = '';
+		var prodDet = '';
+		if(valuee=="ACQ")
+		{
+			companyName="#company_list_acquiring option:selected";
+			category="#category_list_acquiring option:selected";
+			type="#type_list_acquiring option:selected";
+			prodDet="#prodDet_list_acquiring";
+		}
+		
+		if(valuee=="VEN")
+		{
+			companyName="#company_list_vending option:selected";
+			category="#category_list_vending option:selected";
+			type="#type_list_vending option:selected";
+			prodDet="#prodDet_list_vending";
+		}
+		
+		$(prodDet).html('');
+		$.ajax({
+			type : 'post',
+			url : localUrl + 'getProductDetails',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'companyName' : $(companyName).val(), 'category' : $(category).val(), 'type' : $(type).val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$(prodDet).append(optionDB);				
+				});	
+				if(valuee=='VEN')
+					getBatchList(valuee);
+			},
+			error : function(){alert("Unexpected error at getProductDetails().");}
+		});
+	}
+	
+	/*********Get Retailer List*********/
+	function getRetailerList()
+	{
+		$("#retailer_list_acquiring").html('');
+		$.ajax({
+			type: 'get',
+			url: localUrl+'getRetailerList',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(response){
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$("#retailer_list_acquiring").append(optionDB);				
+				});
+			},
+			error: function(){alert("Unexpected error at getRetailerList().");}
+		});
+	}
+	
+	/*********Get Product Category List*********/
+	function getProductCategoryList()
+	{
+		$("#product_category_add").html('');
+		$("#category_list_add").html('');
+		$.ajax({
+			type: 'get',
+			url: localUrl+'getProductCategoryList',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(response){
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$("#product_category_add").append(optionDB);
+					$("#category_list_add").append(optionDB);
+				});
+				getProductTypeByCategory();
+			},
+			error: function(){alert("Unexpected error at getProductCategoryList().");}
+		});
+	}
+	
+	/*********Get CITY List*********/
+	function getCityList()
+	{
+		$("#city_list_add").html('');
+		$.ajax({
+			type: 'get',
+			url: localUrl+'getCityList',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(response){
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$("#city_list_add").append(optionDB);				
+				});
+			},
+			error: function(){alert("Unexpected error at getCityList().");}
+		});
+	}
+	
+	/*********Get CITY List*********/
+	function getMyInventory()
+	{
+		$("#myInventoryTable").html('');
+		$.ajax({
+			type: 'get',
+			url: localUrl+'getMyInventory',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(response){
+				$("#myInventoryTable").html(response.message);	
+				$('#myInventoryTable').DataTable();
+			},
+			error: function(){alert("Unexpected error at getMyInventory().");}
+		});
+	}
+	
+	/*********Get Product Details List*********/
+	function getBatchList(valuee)
+	{
+		var companyName = '';
+		var category = '';
+		var type = '';
+		var prodDet = '';
+		var batDet = '';
+		
+		if(valuee=="VEN")
+		{
+			companyName="#company_list_vending option:selected";
+			category="#category_list_vending option:selected";
+			type="#type_list_vending option:selected";
+			prodDet="#prodDet_list_vending option:selected";
+			batDet = "#batch_list_vending";
+		}
+		
+		$(batDet).html('');
+		$.ajax({
+			type : 'post',
+			url : localUrl + 'getBatchList',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'companyName' : $(companyName).val(), 'category' : $(category).val(), 'type' : $(type).val(), 'prodDet' : $(prodDet).val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$(batDet).append(optionDB);				
+				});				
+			},
+			error : function(){alert("Unexpected error at getBatchList().");}
+		});
+	}
+	
+	/***********Add Company*************/
+	$("#add_company_btn").click(function(){
+		if($('#input_new_company_name').val()=="" || $('#input_new_company_name').val().charAt(0)==" ")
+		{
+			swal("Warning!","Company name field is either empty or contains apace at the beginning", "warning");
+		}
+		else
+		{
+			$.ajax({
+				type : 'post',
+				url : localUrl + 'addCompany',
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				data : JSON.stringify({'companyName' : $('#input_new_company_name').val()}),
+				success : function(response) {
+					if(response.message=='success')
+					{
+						swal("Added!", "New Company Name added successfully.", "success");
+						$('#input_new_company_name').val('');
+						getCompanyList();
+					}
+					else if(response.message=='already exists')
+					{
+						swal("Warning!", "Company Name already available.", "warning");
+						$('#input_new_company_name').val('');
+						getCompanyList();
+					}
+					else
+					{
+						swal("Failed!", response.message, "error");
+						$('#input_new_company_name').val('');
+					}
+				},
+				error : function(){alert("Unexpected error at addCompany().");$('#input_new_company_name').val('');}
+			}); 
+		}
+	});
+	
+	/***********Add Category*************/
+	$("#add_category_btn").click(function(){
+		if($('#input_new_product_category').val()=="" || $('#input_new_product_category').val().charAt(0)==" ")
+		{
+			swal("Warning!","Category field is either empty or contains apace at the beginning", "warning");
+		}
+		else
+		{
+			$.ajax({
+				type : 'post',
+				url : localUrl + 'addCategory',
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				data : JSON.stringify({'category' : $('#input_new_product_category').val()}),
+				success : function(response) {
+					if(response.message=='success')
+					{
+						swal("Added!", "New Category added successfully.", "success");
+						$('#input_new_product_category').val('');
+						getCompanyList();
+					}
+					else if(response.message=='already exists')
+					{
+						swal("Warning!", "Category already available.", "warning");
+						$('#input_new_product_category').val('');
+						getCompanyList();
+					}
+					else
+					{
+						swal("Failed!", response.message, "error");
+						$('#input_new_product_category').val('');
+					}
+				},
+				error : function(){alert("Unexpected error at addCompany().");$('#input_new_product_category').val('');}
+			}); 
+		}
+	});
+	
+	/***********Add Product Type*************/
+	$("#add_type_btn").click(function(){
+		if($('#new_product_type').val()=="" || $('#new_product_type').val().charAt(0)==" ")
+		{
+			swal("Warning!","Product Type field is either empty or contains apace at the beginning", "warning");
+		}
+		else
+		{
+			$.ajax({
+				type : 'post',
+				url : localUrl + 'addProductType',
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				data : JSON.stringify({'category' : $('#product_category_add option:selected').val(), 'type' : $('#new_product_type').val()}),
+				success : function(response) {
+					if(response.message=='success')
+					{
+						swal("Added!", "New Product Type added successfully.", "success");
+						$('#new_product_type').val('');
+						getCompanyList();
+					}
+					else if(response.message=='already exists')
+					{
+						swal("Warning!", "Product Type already available.", "warning");
+						$('#new_product_type').val('');
+						getCompanyList();
+					}
+					else
+					{
+						swal("Failed!", response.message, "error");
+						$('#new_product_type').val('');
+					}
+				},
+				error : function(){alert("Unexpected error at addProductType().");$('#new_product_type').val('');}
+			}); 
+		}
+	});
+	
+	/***********Add Retailer*************/
+	$("#add_retailer_btn").click(function(){
+		if($('#new_retailer').val()=="" || $('#new_retailer').val().charAt(0)==" ")
+		{
+			swal("Warning!","Retailer Name field is either empty or contains apace at the beginning", "warning");
+		}
+		else
+		{
+			$.ajax({
+				type : 'post',
+				url : localUrl + 'addRetailer',
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				data : JSON.stringify({'retailer' : $('#new_retailer').val(), 'city' : $('#city_list_add option:selected').val(), 'address' : $('#retailer_Address_text').val()}),
+				success : function(response) {
+					if(response.message=='success')
+					{
+						swal("Added!", "New Retailer added successfully.", "success");
+						$('#new_retailer').val('');
+						$('#retailer_Address_text').val('');
+						getCompanyList();
+					}
+					else if(response.message=='already exists')
+					{
+						swal("Warning!", "Retailer Name already available.", "warning");
+						$('#new_retailer').val('');
+						$('#retailer_Address_text').val('');
+						getCompanyList();
+					}
+					else
+					{
+						swal("Failed!", response.message, "error");
+						$('#new_retailer').val('');
+						$('#retailer_Address_text').val('');
+					}
+				},
+				error : function(){alert("Unexpected error at addRetailer().");$('#new_retailer').val('');$('#retailer_Address_text').val('');}
+			}); 
+		}
+	});
+	
+	/***********Add City*************/
+	$("#add_city_btn").click(function(){
+		if($('#new_city').val()=="" || $('#new_city').val().charAt(0)==" ")
+		{
+			swal("Warning!","City field is either empty or contains apace at the beginning", "warning");
+		}
+		else
+		{
+			$.ajax({
+				type : 'post',
+				url : localUrl + 'addCity',
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				data : JSON.stringify({'city' : $('#new_city').val()}),
+				success : function(response) {
+					if(response.message=='success')
+					{
+						swal("Added!", "New City added successfully.", "success");
+						$('#new_city').val('');
+						getCityList();
+					}
+					else if(response.message=='already exists')
+					{
+						swal("Warning!", "City already available.", "warning");
+						$('#new_city').val('');
+					}
+					else
+					{
+						swal("Failed!", response.message, "error");
+						$('#new_city').val('');
+					}
+				},
+				error : function(){alert("Unexpected error at addCity().");$('#new_city').val('');}
+			}); 
+		}
+	});
+	
+	/***********Add Product Detail*************/
+	$("#add_prodDet_btn").click(function(){
+		if($('#new_product_detail').val()=="" || $('#new_product_detail').val().charAt(0)==" ")
+		{
+			swal("Warning!","Product Detail field is either empty or contains apace at the beginning", "warning");
+		}
+		else
+		{
+			$.ajax({
+				type : 'post',
+				url : localUrl + 'addProductDetail',
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				data : JSON.stringify({'company' : $('#company_list_add option:selected').val(), 'category' : $('#category_list_add option:selected').val(), 'type' : $('#type_list_add option:selected').val(), 'detail' : $('#new_product_detail').val(), 'unit' : $('#unit_list_add option:selected').val()}),
+				success : function(response) {
+					if(response.message=='success')
+					{
+						swal("Added!", "New Product Detail added successfully.", "success");
+						$('#new_product_detail').val('');
+						getCityList();
+					}
+					else if(response.message=='already exists')
+					{
+						swal("Warning!", "Product Detail already available.", "warning");
+						$('#new_product_detail').val('');
+					}
+					else
+					{
+						swal("Failed!", response.message, "error");
+						$('#new_product_detail').val('');
+					}
+				},
+				error : function(){alert("Unexpected error at addProductDetail().");$('#new_product_detail').val('');}
+			}); 
+		}
+	});
+	
+	/***********getProductTypeByCategory*****************/
+	function getProductTypeByCategory()
+	{
+		$("#type_list_add").html('');
+		$.ajax({  
+
+			type : 'post',
+			url : localUrl + 'getProductTypeByCategory',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'category' : $("#category_list_add option:selected").val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$("#type_list_add").append(optionDB);				
+				});				
+			},
+			error : function(){alert("Unexpected error at getProductTypeByCategory().");}
+		});
+	}
+	
+	/*********Get Unit List*********/
+	function getUnitList()
+	{
+		$("#unit_list_add").html('');
+		$.ajax({
+			type: 'get',
+			url: localUrl+'getUnitList',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(response){
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$("#unit_list_add").append(optionDB);
+				});
+				getProductTypeByCategory();
+			},
+			error: function(){alert("Unexpected error at getUnitList().");}
+		});
+	}
+	
+	/***********Logout*************/
+	function logout()
+	{
+		window.location.replace(localUrl);
+	}
+	
+	</script>
+  </body>
+</html>
