@@ -84,12 +84,29 @@ public class UserRestController {
 		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
 		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/getCompanyListVending", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<String>> getCompanyListVending() throws SQLException, IOException {
+
+		String sql_query = "select distinct(A.COMPANY_NAME) from (select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID) as A";
+		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
+		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/getCategoriesbyCompany", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<String>> getCategoriesbyCompany(@RequestBody Map<String, String> requestBody) throws SQLException{
 
 		String companyName = requestBody.get("companyName");
 		String sql_query = "select distinct(pc.product_catg) from product_details pd JOIN company_details c ON pd.c_id=c.c_id JOIN product_category pc ON pd.pc_id=pc.pc_id WHERE c.company_name='"+companyName+"'";
+		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
+		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getCategoriesbyCompanyVending", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<String>> getCategoriesbyCompanyVending(@RequestBody Map<String, String> requestBody) throws SQLException{
+
+		String companyName = requestBody.get("companyName");
+		String sql_query = "select distinct(A.PRODUCT_CATG) from (select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID) as A WHERE A.COMPANY_NAME='"+companyName+"'";
 		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
 		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
 	}
@@ -104,6 +121,16 @@ public class UserRestController {
 		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/getProductTypeByCompanyAndCategoryVending", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<String>> getProductTypeByCompanyAndCategoryVending(@RequestBody Map<String, String> requestBody) throws SQLException{
+
+		String companyName = requestBody.get("companyName");
+		String category = requestBody.get("category");
+		String sql_query = "select distinct(A.TYPE_NAME) from (select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID) as A WHERE A.COMPANY_NAME='"+companyName+"' AND A.PRODUCT_CATG='"+category+"'";
+		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
+		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/getProductDetails", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<String>> getProductDetails(@RequestBody Map<String, String> requestBody) throws SQLException{
 
@@ -111,6 +138,17 @@ public class UserRestController {
 		String category = requestBody.get("category");
 		String type = requestBody.get("type");
 		String sql_query = "select distinct(pd.prod_name) from product_details pd JOIN company_details c ON pd.c_id=c.c_id JOIN product_category pc ON pd.pc_id=pc.pc_id JOIN product_type pt ON pt.pt_id=pd.pt_id WHERE c.company_name='"+companyName+"' AND pc.product_catg='"+category+"' AND pt.type_name='"+type+"'";
+		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
+		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getProductDetailsVending", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<String>> getProductDetailsVending(@RequestBody Map<String, String> requestBody) throws SQLException{
+
+		String companyName = requestBody.get("companyName");
+		String category = requestBody.get("category");
+		String type = requestBody.get("type");
+		String sql_query = "select distinct(A.PROD_NAME) from (select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID) as A WHERE A.COMPANY_NAME='"+companyName+"' AND A.PRODUCT_CATG='"+category+"' AND A.TYPE_NAME='"+type+"'";
 		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
 		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
 	}
@@ -142,20 +180,20 @@ public class UserRestController {
 	@RequestMapping(value = "/getMyInventory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getMyInventory() throws SQLException, IOException, ClassNotFoundException {
 		
-		String columns = "COMPANY NAME,CATEGORY,TYPE,PRODUCT,DATE OF PURCHASE,DATE OF MFG,DATE OF EXP,BATCH,PURCHASE QTY,REMAINING QTY,UNIT";
-		String sql_query = "select cd.company_name,pc.product_catg,pt.type_name,pd.prod_name,fi.date_of_purchase,fi.mfg_date,fi.exp_date,fi.batch_num,fi.quantity_purchased,fi.quantity_remaining,u.unit from fact_inventory fi JOIN company_details cd ON fi.c_id=cd.c_id JOIN product_category pc ON fi.pc_id=pc.pc_id JOIN product_type pt ON fi.pt_id=pt.pt_id JOIN product_details pd ON fi.pd_id=pd.pd_id JOIN unit u ON fi.u_id=u.u_id ORDER BY cd.company_name";
+		String columns = "Sl No,COMPANY,CATEGORY,TYPE,PRODUCT,RETAILER NAME,RETAILER ADDRESS,UNIT,DATE OF PURCHASE,MFG DATE,EXPIRY DATE,QTY REMAINING,BATCH";
+		String sql_query = "select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID";
 		String tableData = mssqlConnect.fetchTableValues(columns,sql_query);
 		return new ResponseEntity<String>("{\"message\":\"" + tableData + "\"}", HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/getBatchList", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<String>> getBatchList(@RequestBody Map<String, String> requestBody) throws SQLException{
+	@RequestMapping(value = "/getBatchListVending", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<String>> getBatchListVending(@RequestBody Map<String, String> requestBody) throws SQLException{
 
 		String companyName = requestBody.get("companyName");
 		String category = requestBody.get("category");
 		String type = requestBody.get("type");
 		String prodDet = requestBody.get("prodDet");
-		String sql_query = "select fi.batch_num from fact_inventory fi JOIN company_details cd ON fi.c_id=cd.c_id JOIN product_category pc ON fi.pc_id=pc.pc_id JOIN product_type pt ON fi.pt_id=pt.pt_id JOIN product_details pd ON fi.pd_id=pd.pd_id JOIN unit u ON fi.u_id=u.u_id where cd.company_name='"+companyName+"' AND pc.product_catg='"+category+"' AND pt.type_name='"+type+"' AND pd.prod_name='"+prodDet+"' ORDER BY fi.batch_num ";
+		String sql_query = "select distinct(A.BATCH_ID) from (select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID) as A WHERE A.COMPANY_NAME='"+companyName+"' AND A.PRODUCT_CATG='"+category+"' AND A.TYPE_NAME='"+type+"' AND A.PROD_NAME='"+prodDet+"'";
 		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
 		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
 	}
@@ -242,6 +280,34 @@ public class UserRestController {
 		String sql_query = "select distinct(unit) from unit";
 		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
 		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/addItemToStore", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> addItemToStore(@RequestBody Map<String, String> requestBody) throws SQLException, ClassNotFoundException{
+		
+		String company = requestBody.get("company");
+		String type = requestBody.get("type");
+		String category = requestBody.get("category");
+		String detail = requestBody.get("detail");
+		String retailer = requestBody.get("retailer");
+		String unit = requestBody.get("unit");
+		String quantity = requestBody.get("quantity");
+		String dop = requestBody.get("dop");
+		String domfg = requestBody.get("domfg");
+		String doexp = requestBody.get("doexp");
+		String ppunit = requestBody.get("ppunit");
+		String purprice = requestBody.get("purprice");
+		String batch = requestBody.get("batch");
+		String ret_Name = retailer.substring(0,retailer.indexOf(", "));
+		String ret_Addr = retailer.substring(retailer.indexOf(", ")+1,retailer.length());
+		ret_Addr = ret_Addr.trim();	
+		
+		System.out.println(ret_Name+"\n"+ret_Addr);
+		
+		String verifyQuery = "select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID WHERE c.company_name='"+company+"' AND PC.product_catg='"+category+"' AND PT.type_name='"+type+"' AND PD.prod_name='"+detail+"' AND R.retailer_name='"+ret_Name+"' AND R.retailer_address='"+ret_Addr+"' AND U.unit='"+unit+"' AND F.DATE_OF_PURCHASE='"+dop+"' AND F.MFG_DATE='"+domfg+"' AND F.EXP_DATE='"+doexp+"' AND F.BATCH_ID='"+batch+"'";
+		String dataAddQuery = "INSERT INTO FACT_INVENTORY1 values((select count(*)+1 from FACT_INVENTORY1),(select c_id from company_details where company_name='"+company+"'),(select pc_id from product_category where product_catg='"+category+"'),(select pt.pt_id from product_type pt JOIN product_category pc ON pc.pc_id=pt.pc_id where pc.product_catg='"+category+"' AND pt.type_name='"+type+"'),(select pd.pd_id from product_details pd JOIN company_details c ON c.c_id=pd.c_id JOIN product_category pc on pc.pc_id=pd.pc_id JOIN product_type pt ON pt.pt_id=pd.pt_id where c.company_name='"+company+"' AND pc.product_catg='"+category+"' AND pt.type_name='"+type+"' AND pd.prod_name='"+detail+"'),(select r_id from retailer_details where retailer_name='"+ret_Name+"' AND retailer_address='"+ret_Addr+"'),(select u_id from unit where unit='"+unit+"'),'"+quantity+"','"+quantity+"','"+dop+"','"+domfg+"','"+doexp+"','"+ppunit+"','"+purprice+"','"+batch+"')";
+		String result = mssqlConnect.verifyAndAddValues(verifyQuery,dataAddQuery);
+		return new ResponseEntity<String>("{\"message\":\"" + result + "\"}", HttpStatus.OK);
 	}
 
 }

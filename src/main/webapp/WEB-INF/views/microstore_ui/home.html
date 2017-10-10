@@ -1160,7 +1160,7 @@
 								  <label class="col-lg-2 control-label">Product Detail</label>
 								  <div class="col-lg-10">
 									<select class="form-control">
-									  <optgroup label="Select Cities" id="prodDet_list_acquiring">
+									  <optgroup label="Select Product Details" id="prodDet_list_acquiring">
 									  </optgroup>
 									</select>
 								  </div>
@@ -1174,9 +1174,60 @@
 									</select>
 								  </div>
 								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Unit</label>
+								  <div class="col-lg-10">
+									<select class="form-control">
+									  <optgroup label="Select Unit" id="unit_list_acquiring">
+									  </optgroup>
+									</select>
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Quantity</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="quantity_acquiring" type="text" placeholder="Quantity">
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Date of Purchase</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="dop_acquiring" type="text" placeholder="Date of Purchase" readonly>
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">MFG Date</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="mfg_acquiring" type="text" placeholder="Manufacturing Date" readonly>
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Expiry Date</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="exp_acquiring" type="text" placeholder="Expiry Date" readonly>
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Price Per Unit</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="pricePerUnit_acquiring" type="text" placeholder="Price Per Unit">
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Purchase Price</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="purchasePrice_acquiring" type="text" placeholder="Purchase Price">
+								  </div>
+								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">Batch Number/ID</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="batch_acquiring" type="text" placeholder="Batch Number/ID">
+								  </div>
+								</div>
 								<div class="form-group">
 								  <div class="col-lg-10 col-lg-offset-2" align="right">
-									<button class="btn btn-primary">Add Item to My Store</button>
+									<button class="btn btn-primary" id="addItemToStore">Add Item to My Store</button>
 								  </div>
 								</div>
 							  </fieldset>
@@ -1198,7 +1249,7 @@
 								<div class="form-group">
 								  <label class="col-lg-2 control-label">Company</label>
 								  <div class="col-lg-10">
-									<select class="form-control" onchange="getCategoriesbyCompany('VEN');">
+									<select class="form-control" onchange="getCategoriesbyCompanyVending();">
 									  <optgroup label="Select Company" id="company_list_vending">
 									  </optgroup>
 									</select>
@@ -1207,7 +1258,7 @@
 								<div class="form-group">
 								  <label class="col-lg-2 control-label">Category</label>
 								  <div class="col-lg-10">
-									<select class="form-control" onchange="getProductTypeByCompanyAndCategory('VEN');">
+									<select class="form-control" onchange="getProductTypeByCompanyAndCategoryVending();">
 									  <optgroup label="Select Category" id="category_list_vending">
 									  </optgroup>
 									</select>
@@ -1216,7 +1267,7 @@
 								<div class="form-group">
 								  <label class="col-lg-2 control-label">Product Type</label>
 								  <div class="col-lg-10">
-									<select class="form-control" onchange="getProductDetails('VEN')">
+									<select class="form-control" onchange="getProductDetailsVending()">
 									  <optgroup label="Select Type" id="type_list_vending">
 									  </optgroup>
 									</select>
@@ -1225,7 +1276,7 @@
 								<div class="form-group">
 								  <label class="col-lg-2 control-label">Product Detail</label>
 								  <div class="col-lg-10">
-									<select class="form-control" onchange="getBatchList('VEN')">
+									<select class="form-control" onchange="getBatchListVending()">
 									  <optgroup label="Select Detail" id="prodDet_list_vending">
 		 							  </optgroup>
 									</select>
@@ -1342,7 +1393,7 @@
 								<div class="form-group">
 								  <div class="col-lg-10 col-lg-offset-2" align="right">
 									<button class="btn btn-warning">Clear Basket</button>
-									<button class="btn btn-primary">Sell Basket</button>
+									<button class="btn btn-primary">Create Invoice</button>
 								  </div>
 								</div>
 							</div>
@@ -1382,6 +1433,9 @@
 	<!-- Sweet Notification -->
 	<script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     <script type="text/javascript" src="js/plugins/sweetalert.min.js"></script>
+	
+	<!-- Date Picker -->
+	<script type="text/javascript" src="js/plugins/bootstrap-datepicker.min.js"></script>
 	
 	<!-- Custom Scripts-->
 	<script>
@@ -1603,10 +1657,12 @@
 	
 	$(document).ready(function() {
 		getCompanyList();
+		getCompanyListVending();
 		getProductCategoryList();
 		getCityList();
 		getMyInventory();
 		getUnitList();
+		getRetailerList();
 	});
 	
 	
@@ -1615,7 +1671,6 @@
 	{
 		$("#company_list_acquiring").html('');
 		$("#company_list_add").html('');
-		$("#company_list_vending").html('');
 		$.ajax({
 			type: 'get',
 			url: localUrl+'getCompanyList',
@@ -1626,13 +1681,31 @@
 					var optionDB = '<option>'+this+'</option>';
 					$("#company_list_acquiring").append(optionDB);	
 					$("#company_list_add").append(optionDB);
-					$("#company_list_vending").append(optionDB);
 				});
 				getCategoriesbyCompany('ADD');
 				getCategoriesbyCompany('ACQ');
-				getCategoriesbyCompany('VEN');
 			},
 			error: function(){alert("Unexpected error at getCompanyList().");}
+		});
+	}
+	
+	/*********Get Company List For Vending*********/
+	function getCompanyListVending()
+	{
+		$("#company_list_vending").html('');
+		$.ajax({
+			type: 'get',
+			url: localUrl+'getCompanyListVending',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(response){
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$("#company_list_vending").append(optionDB);
+				});
+				getCategoriesbyCompanyVending();
+			},
+			error: function(){alert("Unexpected error at getCompanyListVending().");}
 		});
 	}
 	
@@ -1760,8 +1833,6 @@
 					var optionDB = '<option>'+this+'</option>';
 					$(prodDet).append(optionDB);				
 				});	
-				if(valuee=='VEN')
-					getBatchList(valuee);
 			},
 			error : function(){alert("Unexpected error at getProductDetails().");}
 		});
@@ -1827,7 +1898,7 @@
 		});
 	}
 	
-	/*********Get CITY List*********/
+	/*********Get Inventory List*********/
 	function getMyInventory()
 	{
 		$("#myInventoryTable").html('');
@@ -1844,40 +1915,6 @@
 		});
 	}
 	
-	/*********Get Product Details List*********/
-	function getBatchList(valuee)
-	{
-		var companyName = '';
-		var category = '';
-		var type = '';
-		var prodDet = '';
-		var batDet = '';
-		
-		if(valuee=="VEN")
-		{
-			companyName="#company_list_vending option:selected";
-			category="#category_list_vending option:selected";
-			type="#type_list_vending option:selected";
-			prodDet="#prodDet_list_vending option:selected";
-			batDet = "#batch_list_vending";
-		}
-		
-		$(batDet).html('');
-		$.ajax({
-			type : 'post',
-			url : localUrl + 'getBatchList',
-			contentType : "application/json; charset=utf-8",
-			dataType : "json",
-			data : JSON.stringify({'companyName' : $(companyName).val(), 'category' : $(category).val(), 'type' : $(type).val(), 'prodDet' : $(prodDet).val()}),
-			success : function(response) {
-				$(response).each(function(){
-					var optionDB = '<option>'+this+'</option>';
-					$(batDet).append(optionDB);				
-				});				
-			},
-			error : function(){alert("Unexpected error at getBatchList().");}
-		});
-	}
 	
 	/***********Add Company*************/
 	$("#add_company_btn").click(function(){
@@ -1899,12 +1936,14 @@
 						swal("Added!", "New Company Name added successfully.", "success");
 						$('#input_new_company_name').val('');
 						getCompanyList();
+						getCompanyListVending();
 					}
 					else if(response.message=='already exists')
 					{
 						swal("Warning!", "Company Name already available.", "warning");
 						$('#input_new_company_name').val('');
 						getCompanyList();
+						getCompanyListVending();
 					}
 					else
 					{
@@ -1937,12 +1976,14 @@
 						swal("Added!", "New Category added successfully.", "success");
 						$('#input_new_product_category').val('');
 						getCompanyList();
+						getCompanyListVending();
 					}
 					else if(response.message=='already exists')
 					{
 						swal("Warning!", "Category already available.", "warning");
 						$('#input_new_product_category').val('');
 						getCompanyList();
+						getCompanyListVending();
 					}
 					else
 					{
@@ -1975,12 +2016,14 @@
 						swal("Added!", "New Product Type added successfully.", "success");
 						$('#new_product_type').val('');
 						getCompanyList();
+						getCompanyListVending();
 					}
 					else if(response.message=='already exists')
 					{
 						swal("Warning!", "Product Type already available.", "warning");
 						$('#new_product_type').val('');
 						getCompanyList();
+						getCompanyListVending();
 					}
 					else
 					{
@@ -2014,6 +2057,7 @@
 						$('#new_retailer').val('');
 						$('#retailer_Address_text').val('');
 						getCompanyList();
+						getCompanyListVending();
 					}
 					else if(response.message=='already exists')
 					{
@@ -2021,6 +2065,7 @@
 						$('#new_retailer').val('');
 						$('#retailer_Address_text').val('');
 						getCompanyList();
+						getCompanyListVending();
 					}
 					else
 					{
@@ -2133,6 +2178,7 @@
 	function getUnitList()
 	{
 		$("#unit_list_add").html('');
+		$("#unit_list_acquiring").html('');
 		$.ajax({
 			type: 'get',
 			url: localUrl+'getUnitList',
@@ -2142,6 +2188,7 @@
 				$(response).each(function(){
 					var optionDB = '<option>'+this+'</option>';
 					$("#unit_list_add").append(optionDB);
+					$("#unit_list_acquiring").append(optionDB);
 				});
 				getProductTypeByCategory();
 			},
@@ -2155,6 +2202,266 @@
 		window.location.replace(localUrl);
 	}
 	
+	
+	/***********Date Picker************/
+	$('#dop_acquiring').datepicker({
+      	format: "dd-M-yyyy",
+      	autoclose: true,
+      	todayHighlight: true
+    });
+	
+	$('#mfg_acquiring').datepicker({
+      	format: "dd-M-yyyy",
+      	autoclose: true,
+      	todayHighlight: true
+    });
+	
+	$('#exp_acquiring').datepicker({
+      	format: "dd-M-yyyy",
+      	autoclose: true,
+      	todayHighlight: true
+    });
+	
+	/********Add Item To Store********/
+	$("#addItemToStore").click(function(){
+		
+		var company = $('#company_list_acquiring option:selected').val();
+		var category = $('#category_list_acquiring option:selected').val();
+		var type = $('#type_list_acquiring option:selected').val();
+		var detail = $('#prodDet_list_acquiring option:selected').val();
+		var retailer = $('#retailer_list_acquiring option:selected').val();
+		var dop = $('#dop_acquiring').val();
+		var domfg = $('#mfg_acquiring').val();
+		var doexp = $('#exp_acquiring').val();
+		var ppunit = $('#pricePerUnit_acquiring').val();
+		var purprice = $('#purchasePrice_acquiring').val();
+		var batch = $('#batch_acquiring').val();
+		var unit = $('#unit_list_acquiring option:selected').val();
+		var quantity = $('#quantity_acquiring').val();
+
+		if(company==null)
+		{
+			swal("Warning!","No Company Name Selected", "warning");
+		}
+		else if(category==null)
+		{
+			swal("Warning!","No Category Selected", "warning");
+		}
+		else if(type==null)
+		{
+			swal("Warning!","No Product Type Selected", "warning");
+		}
+		else if(detail==null)
+		{
+			swal("Warning!","No Product Detail Selected", "warning");
+		}
+		else if(retailer==null)
+		{
+			swal("Warning!","No Retailer Selected", "warning");
+		}
+		else if(unit==null)
+		{
+			swal("Warning!","No Unit Selected", "warning");
+		}
+		else if((quantity=='' || quantity.charAt(0)==" "))
+		{
+			swal("Warning!","Quantity value may be empty or contains a space at the beginning", "warning");
+		}
+		else if(dop=='')
+		{
+			swal("Warning!","Date of Purchase is empty", "warning");
+		}
+		else if(domfg=='')
+		{
+			swal("Warning!","MFG Date is empty", "warning");
+		}
+		else if(doexp=='')
+		{
+			swal("Warning!","Expiry Date is empty", "warning");
+		}
+		else if(ppunit=='' || ppunit.charAt(0)==" ")
+		{
+			swal("Warning!","Price Per Unit value may be empty or contains a space at the beginning", "warning");
+		}
+		else if(purprice=='' || purprice.charAt(0)==" ")
+		{
+			swal("Warning!","Purchase Price may be empty or contains a space at the beginning", "warning");
+		}
+		else if(batch=='' || batch.charAt(0)==" ")
+		{
+			swal("Warning!","Batch Number/ID may be empty or contains a space at the beginning", "warning");
+		}
+		else
+		{
+			var regexp = /^[0-9]+\.?[0-9]*$/;
+			if(regexp.test(quantity))
+			{
+				if(regexp.test(ppunit))
+				{
+					if(regexp.test(purprice))
+					{
+						$.ajax({
+							type : 'post',
+							url : localUrl + 'addItemToStore',
+							contentType : "application/json; charset=utf-8",
+							dataType : "json",
+							data : JSON.stringify({'company' : company, 'category' : category, 'type' : type, 'detail' : detail,'retailer' : retailer, 'unit' : unit, 'quantity' : quantity, 'dop' : dop, 'domfg' : domfg, 'doexp' : doexp, 'ppunit' : ppunit, 'purprice' : purprice, 'batch' : batch}),
+							success : function(response) {
+								if(response.message=='success')
+								{
+									swal("Added!", "Item added successfully.", "success");
+									getMyInventory();
+								}
+								else if(response.message=='already exists')
+								{
+									swal("Warning!", "Item already available.", "warning");
+								}
+								else
+								{
+									swal("Failed!", response.message, "error");
+								}
+							},
+							error : function(){alert("Unexpected error at addItemToStore().");}
+						}); 
+					}
+					else
+					{
+						swal("Warning!","Enter Valid Purchase Price", "warning");
+						$('#purchasePrice_acquiring').val('');
+					}
+				}
+				else
+				{
+					swal("Warning!","Enter Valid Price Per Unit ", "warning");
+					$('#pricePerUnit_acquiring').val('');
+				}
+			}
+			else
+			{
+				swal("Warning!","Enter Valid Quantity", "warning");
+				$('#quantity_acquiring').val('');
+			}
+		}
+	});
+	
+	/*********Get Category List For Vending*********/
+	function getCategoriesbyCompanyVending()
+	{
+		var companyName = '';
+		var category = '';
+
+		companyName="#company_list_vending option:selected";
+		category="#category_list_vending";
+		
+		$(category).html('');
+		$.ajax({
+			type : 'post',
+			url : localUrl + 'getCategoriesbyCompanyVending',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'companyName' : $(companyName).val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$(category).append(optionDB);				
+				});
+				getProductTypeByCompanyAndCategoryVending();
+			},
+			error : function(){alert("Unexpected error at getCategoriesbyCompanyVending().");}
+		});
+	}
+	
+	/*********Get Type List For Vending*********/
+	function getProductTypeByCompanyAndCategoryVending()
+	{
+		var companyName = '';
+		var category = '';
+		var type = '';
+
+		companyName="#company_list_vending option:selected";
+		category="#category_list_vending option:selected";
+		type="#type_list_vending";
+		
+		$(type).html('');
+		$.ajax({
+			type : 'post',
+			url : localUrl + 'getProductTypeByCompanyAndCategoryVending',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'companyName' : $(companyName).val(), 'category' : $(category).val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$(type).append(optionDB);				
+				});
+				getProductDetailsVending();
+			},
+			error : function(){alert("Unexpected error at getProductTypeByCompanyAndCategoryVending().");}
+		});
+	}
+	
+	/*********Get Product Details List For Vending*********/
+	function getProductDetailsVending()
+	{
+		var companyName = '';
+		var category = '';
+		var type = '';
+		var prodDet = '';
+		
+		companyName="#company_list_vending option:selected";
+		category="#category_list_vending option:selected";
+		type="#type_list_vending option:selected";
+		prodDet="#prodDet_list_vending";
+		
+		$(prodDet).html('');
+		$.ajax({
+			type : 'post',
+			url : localUrl + 'getProductDetailsVending',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'companyName' : $(companyName).val(), 'category' : $(category).val(), 'type' : $(type).val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$(prodDet).append(optionDB);				
+				});	
+				getBatchListVending();
+			},
+			error : function(){alert("Unexpected error at getProductDetailsVending().");}
+		});
+	}
+	
+	/*********Get Batch List Vending*********/
+	function getBatchListVending()
+	{
+		var companyName = '';
+		var category = '';
+		var type = '';
+		var prodDet = '';
+		var batDet = '';
+		
+		companyName="#company_list_vending option:selected";
+		category="#category_list_vending option:selected";
+		type="#type_list_vending option:selected";
+		prodDet="#prodDet_list_vending option:selected";
+		batDet = "#batch_list_vending";
+
+		$(batDet).html('');
+		$.ajax({
+			type : 'post',
+			url : localUrl + 'getBatchListVending',
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			data : JSON.stringify({'companyName' : $(companyName).val(), 'category' : $(category).val(), 'type' : $(type).val(), 'prodDet' : $(prodDet).val()}),
+			success : function(response) {
+				$(response).each(function(){
+					var optionDB = '<option>'+this+'</option>';
+					$(batDet).append(optionDB);				
+				});				
+			},
+			error : function(){alert("Unexpected error at getBatchListVending().");}
+		});
+	}
 	</script>
   </body>
 </html>
