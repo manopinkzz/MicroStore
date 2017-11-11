@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-control" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 
-<title>Jumbo - Login</title>
+<title>MicroStore - Login</title>
  
     <script>
     /*! jQuery v2.2.4 | (c) jQuery Foundation | jquery.org/license */
@@ -276,8 +276,8 @@ warningText {
 <body>
 
 	<div class="row col-lg-12" align="right" style="margin-top:15px">
-		<button class="button" id="licDetbtn" onclick="viewLicenseDetails();">View License Details</button>
-		<button class="button" id="licUpdtbtn" onclick="updateLicenseDetails();">Update License Details</button>
+		<!-- <button class="button" id="licDetbtn" onclick="viewLicenseDetails();">View License Details</button>
+		<button class="button" id="licUpdtbtn" onclick="updateLicenseDetails();">Update License Details</button> -->
 	</div>
 	<div class="row col-lg-12" align="center">
 	<br>MicroStore
@@ -319,7 +319,7 @@ warningText {
 			<br><br><br><br><br>
 			MicroStore
 			<h6>
-				© 2016 All Rights Reserved. Hexaware Technologies Ltd.
+				Support and FAQ's
 			</h6>
 		</div>
 	</footer>   
@@ -327,7 +327,7 @@ warningText {
 <script>
 $("#subButton").click(function(){
 	/* //url = "${pageContext.request.contextPath}" + "/login";
-	url = "http://localhost:8080/jumbo/login";
+	url = "http://192.168.43.16:8080/jumbo/login";
 	 // alert(url);
       var posting = $.post( url, { username: $("#userId").val(), password: $("#userPass").val() } );
       console.log(posting); 
@@ -362,7 +362,7 @@ $("#subButton").click(function(){
       function verifyLicense(){
      	 $.ajax({
   	 		type: 'get',
-  	 		url: 'http://localhost:8080/jumbo/verifyLicense',
+  	 		url: 'http://192.168.43.16:8080/jumbo/verifyLicense',
   	 		contentType: "application/json; charset=utf-8",
   	 		dataType: "json",
   	 		data: '',
@@ -387,7 +387,7 @@ $("#subButton").click(function(){
       {
     	  $.ajax({
     	 		type: 'get',
-    	 		url: 'http://localhost:8080/jumbo/viewLicenseDetails',
+    	 		url: 'http://192.168.43.16:8080/jumbo/viewLicenseDetails',
     	 		contentType: "application/json; charset=utf-8",
     	 		dataType: "json",
     	 		data: '',

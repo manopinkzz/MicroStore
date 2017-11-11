@@ -99,7 +99,7 @@
 								</div>
 							</a>
 						  
-							<a href="#" id="my_tasks">
+							<a href="#" id="my_tasks" disabled>
 								<div class="col-md-6">
 									<div class="widget-small warning"><i class="icon fa fa-tasks fa-3x"></i>
 										<div class="info">
@@ -109,7 +109,7 @@
 								</div>
 							</a>
 						  
-							<a href="#" id="new_items">
+							<a href="#" id="new_items" disabled>
 								<div class="col-md-6">
 									<div class="widget-small primary"><i class="icon fa fa-shopping-cart fa-3x"></i>
 										<div class="info">
@@ -654,7 +654,60 @@
 			
 			<!---------------------------------------Expiring Items--------------------------------------->
 			<div id="expiring_items_div" hidden>
-			hohohoho
+				<div class="row">
+				  <div class="col-md-12">
+					<div class="card">
+					  <div class="card-body" style="overflow-x: scroll;">
+						<table class="table table-hover table-bordered" id="myExpiringItemsTable">
+						  <thead>
+							<tr>
+							  <th>Name</th>
+							  <th>Position</th>
+							  <th>Office</th>
+							  <th>Age</th>
+							  <th>Start date</th>
+							  <th>Salary</th>
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr>
+							  <td>Tiger Nixon</td>
+							  <td>System Architect</td>
+							  <td>Edinburgh</td>
+							  <td>61</td>
+							  <td>2011/04/25</td>
+							  <td>$320,800</td>
+							</tr>
+							<tr>
+							  <td>Garrett Winters</td>
+							  <td>Accountant</td>
+							  <td>Tokyo</td>
+							  <td>63</td>
+							  <td>2011/07/25</td>
+							  <td>$170,750</td>
+							</tr>
+							<tr>
+							  <td>Ashton Cox</td>
+							  <td>Junior Technical Author</td>
+							  <td>San Francisco</td>
+							  <td>66</td>
+							  <td>2009/01/12</td>
+							  <td>$86,000</td>
+							</tr>
+							<tr>
+							  <td>Donna Snider</td>
+							  <td>Customer Support</td>
+							  <td>New York</td>
+							  <td>27</td>
+							  <td>2011/01/25</td>
+							  <td>$112,000</td>
+							</tr>
+						  </tbody>
+						</table>
+					  </div>
+					</div>
+				  </div>
+				</div>
 			</div>
 			
 			<!---------------------------------------Manage My Store--------------------------------------->
@@ -1225,6 +1278,12 @@
 									<input class="form-control" id="batch_acquiring" type="text" placeholder="Batch Number/ID">
 								  </div>
 								</div>
+								<div class="form-group col-lg-6">
+								  <label class="col-lg-2 control-label">HSN CODE</label>
+								  <div class="col-lg-10">
+									<input class="form-control" id="hsn_acquiring" type="text" placeholder="HSN Code">
+								  </div>
+								</div>
 								<div class="form-group">
 								  <div class="col-lg-10 col-lg-offset-2" align="right">
 									<button class="btn btn-primary" id="addItemToStore">Add Item to My Store</button>
@@ -1294,7 +1353,7 @@
 								<div class="form-group">
 								  <label class="col-lg-2 control-label">Quantity</label>
 								  <div class="col-lg-10">
-									<input class="form-control" id="input_quantity_vending" type="text" placeholder="Quantity">
+									<input class="form-control" id="input_quantity_vending" type="text" placeholder="Quantity" oninput="fetchPrice()">
 								  </div>
 								</div>
 								<div class="form-group">
@@ -1484,7 +1543,7 @@
     });
 	
 	/***********Opening My Tasks***********/
-	$("#my_tasks").click(function(){	
+	/* $("#my_tasks").click(function(){	
 		$("#div_title").html('My Tasks');
 		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li><a href="#" onclick="openDashboard();">Dashboard</a></li><li class="active">My Tasks</li>');
 		
@@ -1498,10 +1557,10 @@
 		$("#vending_div").hide();
 		$("#invoice_history_div").hide();
 		$("#help_div").hide();
-    });
+    }); */
 	
 	/***********Opening New Items***********/
-	$("#new_items").click(function(){	
+	/* $("#new_items").click(function(){	
 		$("#div_title").html('New Items');
 		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li><a href="#" onclick="openDashboard();">Dashboard</a></li><li class="active">New Items</li>');
 		
@@ -1515,13 +1574,13 @@
 		$("#vending_div").hide();
 		$("#invoice_history_div").hide();
 		$("#help_div").hide();
-    });
+    }); */
 	
 	/***********Opening Expiring Items***********/
 	$("#expiring_items").click(function(){	
 		$("#div_title").html('Expiring Items');
 		$("#breadcrumb_title").html('<li><i class="fa fa-home fa-lg"></i></li><li><a href="#" onclick="openDashboard();">Dashboard</a></li><li class="active">Expiring Items</li>');
-		
+		myExpiringItemsTable();
 		$("#my_dashboard_div").hide();
 		$("#my_inventory_div").hide();
 		$("#my_tasks_div").hide();
@@ -2238,6 +2297,7 @@
 		var batch = $('#batch_acquiring').val();
 		var unit = $('#unit_list_acquiring option:selected').val();
 		var quantity = $('#quantity_acquiring').val();
+		var hsn = $('#hsn_acquiring').val();
 
 		if(company==null)
 		{
@@ -2291,6 +2351,10 @@
 		{
 			swal("Warning!","Batch Number/ID may be empty or contains a space at the beginning", "warning");
 		}
+		else if(hsn=='' || hsn.charAt(0)==" ")
+		{
+			swal("Warning!","HSN Code may be empty or contains a space at the beginning", "warning");
+		}
 		else
 		{
 			var regexp = /^[0-9]+\.?[0-9]*$/;
@@ -2305,7 +2369,7 @@
 							url : localUrl + 'addItemToStore',
 							contentType : "application/json; charset=utf-8",
 							dataType : "json",
-							data : JSON.stringify({'company' : company, 'category' : category, 'type' : type, 'detail' : detail,'retailer' : retailer, 'unit' : unit, 'quantity' : quantity, 'dop' : dop, 'domfg' : domfg, 'doexp' : doexp, 'ppunit' : ppunit, 'purprice' : purprice, 'batch' : batch}),
+							data : JSON.stringify({'company' : company, 'category' : category, 'type' : type, 'detail' : detail,'retailer' : retailer, 'unit' : unit, 'quantity' : quantity, 'dop' : dop, 'domfg' : domfg, 'doexp' : doexp, 'ppunit' : ppunit, 'purprice' : purprice, 'batch' : batch, 'hsn' : hsn}),
 							success : function(response) {
 								if(response.message=='success')
 								{
@@ -2460,6 +2524,73 @@
 				});				
 			},
 			error : function(){alert("Unexpected error at getBatchListVending().");}
+		});
+	}
+	
+	function fetchPrice()
+	{
+		var regexp = /^[0-9]+\.?[0-9]*$/;
+		if(regexp.test($('#input_quantity_vending').val()))
+		{
+			var companyName = '';
+			var category = '';
+			var type = '';
+			var prodDet = '';
+			var batDet = '';
+			var quantity = '';
+			var price = '';
+			
+			companyName="#company_list_vending option:selected";
+			category="#category_list_vending option:selected";
+			type="#type_list_vending option:selected";
+			prodDet="#prodDet_list_vending option:selected";
+			batDet = "#batch_list_vending option:selected";
+			quantity = "#input_quantity_vending";
+			price = "#price_vending";
+
+			$(price).val('');
+			$.ajax({
+				type : 'post',
+				url : localUrl + 'fetchPrice',
+				contentType : "application/json; charset=utf-8",
+				dataType : "json",
+				data : JSON.stringify({'companyName' : $(companyName).val(), 'category' : $(category).val(), 'type' : $(type).val(), 'prodDet' : $(prodDet).val(), 'batch' : $(batDet).val(), 'quantity' : $(quantity).val()}),
+				success : function(response) {
+					if(response.message.includes("fail-"))
+					{
+						var ade = response.message.split("-");
+						swal("Warning!", "Quantity remaining : "+ade[1], "warning");
+						$('#input_quantity_vending').val('');
+						$('#price_vending').val('');
+					}
+					else
+						$(price).val(response.message);							
+				},
+				error : function(){alert("Unexpected error at fetchPrice().");}
+			});
+		}
+		else
+		{
+			swal("Warning!", "Enter a valid quantity", "warning");
+			$('#input_quantity_vending').val('');
+			$('#price_vending').val('');
+		}
+		
+	}
+	
+	function myExpiringItemsTable()
+	{
+		$("#myExpiringItemsTable").html('');
+		$.ajax({
+			type: 'get',
+			url: localUrl+'getExpiringList',
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(response){
+				$("#myExpiringItemsTable").html(response.message);	
+				$('#myExpiringItemsTable').DataTable();
+			},
+			error: function(){alert("Unexpected error at myExpiringItemsTable().");}
 		});
 	}
 	</script>

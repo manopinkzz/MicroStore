@@ -51,9 +51,10 @@ public class mssqlConnect {
 		Statement stmt = con.createStatement();
 		ResultSet res = stmt.executeQuery(sql);
 		int colCount= res.getMetaData().getColumnCount();
-		
+		int xx=0;
 		while(res.next()) {
 			tableData = tableData + "<tr>";
+			tableData = tableData + "<td>" + (++xx) + "</td>";
 			for(int i=1;i<=colCount;i++)
 				tableData = tableData + "<td>" + res.getString(i) + "</td>";
 			tableData = tableData + "</tr>";
@@ -93,6 +94,21 @@ public class mssqlConnect {
 			}
 		}
 		return sval;
+	}
+	
+	public static String getSingleValue(String verifyQuery) throws SQLException, ClassNotFoundException
+	{
+		Class.forName(className);
+		Connection con = DriverManager.getConnection(connectionString,user,password);
+		Statement stmt = con.createStatement();
+		ResultSet res = stmt.executeQuery(verifyQuery);
+		String value = "";
+		while(res.next()) 
+		{
+			value = res.getString(1)+","+res.getString(2);
+			System.out.println(value);
+		}
+		return value;
 	}
 
 	

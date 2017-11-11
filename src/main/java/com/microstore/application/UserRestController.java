@@ -164,6 +164,7 @@ public class UserRestController {
 	@RequestMapping(value = "/getProductCategoryList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<String>> getProductCategoryList() throws SQLException, IOException {
 
+		System.out.println("Its Coming");
 		String sql_query = "select distinct(product_catg) from product_category";
 		List<String> dbName = mssqlConnect.fetchDropdownValues(sql_query);
 		return new ResponseEntity<List<String>>(dbName, HttpStatus.OK);
@@ -180,8 +181,8 @@ public class UserRestController {
 	@RequestMapping(value = "/getMyInventory", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getMyInventory() throws SQLException, IOException, ClassNotFoundException {
 		
-		String columns = "Sl No,COMPANY,CATEGORY,TYPE,PRODUCT,RETAILER NAME,RETAILER ADDRESS,UNIT,DATE OF PURCHASE,MFG DATE,EXPIRY DATE,QTY REMAINING,BATCH";
-		String sql_query = "select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID";
+		String columns = "Sl No,COMPANY,CATEGORY,TYPE,PRODUCT,RETAILER NAME,RETAILER ADDRESS,UNIT,DATE OF PURCHASE,MFG DATE,EXPIRY DATE,QTY REMAINING,BATCH,HSN CODE";
+		String sql_query = "select C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID,F.HSN_CODE from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID";
 		String tableData = mssqlConnect.fetchTableValues(columns,sql_query);
 		return new ResponseEntity<String>("{\"message\":\"" + tableData + "\"}", HttpStatus.OK);
 	}
@@ -298,16 +299,51 @@ public class UserRestController {
 		String ppunit = requestBody.get("ppunit");
 		String purprice = requestBody.get("purprice");
 		String batch = requestBody.get("batch");
+		String hsn = requestBody.get("hsn");
 		String ret_Name = retailer.substring(0,retailer.indexOf(", "));
 		String ret_Addr = retailer.substring(retailer.indexOf(", ")+1,retailer.length());
 		ret_Addr = ret_Addr.trim();	
 		
 		System.out.println(ret_Name+"\n"+ret_Addr);
 		
-		String verifyQuery = "select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.BATCH_ID from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID WHERE c.company_name='"+company+"' AND PC.product_catg='"+category+"' AND PT.type_name='"+type+"' AND PD.prod_name='"+detail+"' AND R.retailer_name='"+ret_Name+"' AND R.retailer_address='"+ret_Addr+"' AND U.unit='"+unit+"' AND F.DATE_OF_PURCHASE='"+dop+"' AND F.MFG_DATE='"+domfg+"' AND F.EXP_DATE='"+doexp+"' AND F.BATCH_ID='"+batch+"'";
-		String dataAddQuery = "INSERT INTO FACT_INVENTORY1 values((select count(*)+1 from FACT_INVENTORY1),(select c_id from company_details where company_name='"+company+"'),(select pc_id from product_category where product_catg='"+category+"'),(select pt.pt_id from product_type pt JOIN product_category pc ON pc.pc_id=pt.pc_id where pc.product_catg='"+category+"' AND pt.type_name='"+type+"'),(select pd.pd_id from product_details pd JOIN company_details c ON c.c_id=pd.c_id JOIN product_category pc on pc.pc_id=pd.pc_id JOIN product_type pt ON pt.pt_id=pd.pt_id where c.company_name='"+company+"' AND pc.product_catg='"+category+"' AND pt.type_name='"+type+"' AND pd.prod_name='"+detail+"'),(select r_id from retailer_details where retailer_name='"+ret_Name+"' AND retailer_address='"+ret_Addr+"'),(select u_id from unit where unit='"+unit+"'),'"+quantity+"','"+quantity+"','"+dop+"','"+domfg+"','"+doexp+"','"+ppunit+"','"+purprice+"','"+batch+"')";
+		String verifyQuery = "select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.BATCH_ID,F.HSN_CODE from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID WHERE c.company_name='"+company+"' AND PC.product_catg='"+category+"' AND PT.type_name='"+type+"' AND PD.prod_name='"+detail+"' AND R.retailer_name='"+ret_Name+"' AND R.retailer_address='"+ret_Addr+"' AND U.unit='"+unit+"' AND F.DATE_OF_PURCHASE='"+dop+"' AND F.MFG_DATE='"+domfg+"' AND F.EXP_DATE='"+doexp+"' AND F.BATCH_ID='"+batch+"'";
+		String dataAddQuery = "INSERT INTO FACT_INVENTORY1 values((select count(*)+1 from FACT_INVENTORY1),(select c_id from company_details where company_name='"+company+"'),(select pc_id from product_category where product_catg='"+category+"'),(select pt.pt_id from product_type pt JOIN product_category pc ON pc.pc_id=pt.pc_id where pc.product_catg='"+category+"' AND pt.type_name='"+type+"'),(select pd.pd_id from product_details pd JOIN company_details c ON c.c_id=pd.c_id JOIN product_category pc on pc.pc_id=pd.pc_id JOIN product_type pt ON pt.pt_id=pd.pt_id where c.company_name='"+company+"' AND pc.product_catg='"+category+"' AND pt.type_name='"+type+"' AND pd.prod_name='"+detail+"'),(select r_id from retailer_details where retailer_name='"+ret_Name+"' AND retailer_address='"+ret_Addr+"'),(select u_id from unit where unit='"+unit+"'),'"+quantity+"','"+quantity+"','"+dop+"','"+domfg+"','"+doexp+"','"+ppunit+"','"+purprice+"','"+batch+"','"+hsn+"')";
 		String result = mssqlConnect.verifyAndAddValues(verifyQuery,dataAddQuery);
 		return new ResponseEntity<String>("{\"message\":\"" + result + "\"}", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/fetchPrice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> fetchPrice(@RequestBody Map<String, String> requestBody) throws SQLException, ClassNotFoundException{
+		
+		String companyName = requestBody.get("companyName");
+		String type = requestBody.get("type");
+		String category = requestBody.get("category");
+		String prodDet = requestBody.get("prodDet");
+		String quantity = requestBody.get("quantity");
+		String batch = requestBody.get("batch");
+		
+		String query = "select A.MRP_PER_UNIT,A.QTY_REMAINING from (select F.F_ID,C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID,F.MRP_PER_UNIT from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID) as A WHERE A.COMPANY_NAME='"+companyName+"' AND A.PRODUCT_CATG='"+category+"' AND A.TYPE_NAME='"+type+"' AND A.PROD_NAME='"+prodDet+"' AND A.BATCH_ID='"+batch+"'";
+		String fetchedValue = mssqlConnect.getSingleValue(query);
+		String[] aspx = fetchedValue.split(",");
+		String res = "";
+		float result = 0;
+		if(Integer.parseInt(aspx[1]) >= Integer.parseInt(quantity))
+		{
+			result = Float.parseFloat(aspx[0])*Float.parseFloat(quantity);
+			res = Float.toString(result);
+		}
+		else
+			res = "fail-"+aspx[1];
+		return new ResponseEntity<String>("{\"message\":\"" + res + "\"}", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getExpiringList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getExpiringList() throws SQLException, IOException, ClassNotFoundException {
+		
+		String columns = "Sl No,COMPANY,CATEGORY,TYPE,PRODUCT,RETAILER NAME,RETAILER ADDRESS,UNIT,DATE OF PURCHASE,MFG DATE,EXPIRY DATE,QTY REMAINING,BATCH,HSN CODE";
+		String sql_query = "select C.COMPANY_NAME,PC.PRODUCT_CATG,PT.TYPE_NAME,PD.PROD_NAME,R.retailer_name,R.retailer_address,U.UNIT,F.DATE_OF_PURCHASE,F.MFG_DATE,F.EXP_DATE,F.QTY_REMAINING,F.BATCH_ID,F.HSN_CODE from FACT_INVENTORY1 F JOIN company_details C ON C.c_id=F.C_ID JOIN product_category PC ON PC.pc_id=F.PC_ID JOIN product_type PT ON PT.pt_id=F.PT_ID JOIN product_details PD ON PD.pd_id=F.PD_ID JOIN retailer_details R ON R.r_id=F.R_ID JOIN unit U ON U.u_id=F.U_ID WHERE F.EXP_DATE between CURRENT_TIMESTAMP AND DATEADD(MONTH,2,CURRENT_TIMESTAMP)";
+		String tableData = mssqlConnect.fetchTableValues(columns,sql_query);
+		return new ResponseEntity<String>("{\"message\":\"" + tableData + "\"}", HttpStatus.OK);
 	}
 
 }
