@@ -33,7 +33,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "microstore_ui/home";
+		return "home";
 	}
 	
 }
